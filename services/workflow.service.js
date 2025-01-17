@@ -328,7 +328,9 @@ const checkCondition = async (config, variables) => {
         const response = {
             status: "fail",
             message: "Exception occurred",
-            data: {},
+            data: {
+                isSatisfied: false
+            },
             errors: []
         };
 
@@ -368,7 +370,8 @@ const executeWorkflow = async (workflowId) => {
             const steps = workflow.steps;
 
             // Initialize executed steps responses
-            const executedStepsResponses = [];
+            const executedSteps = [];
+            const failedSteps   = [];
           
             // Loop through the steps
             for (const step of steps) {
@@ -377,6 +380,7 @@ const executeWorkflow = async (workflowId) => {
                 let executeStepRes = null;
 
                 // Retrieve the step details
+                const stepID        = step?.id;
                 const type          = step?.type;
                 const configJson    = step?.config;
 
@@ -391,7 +395,7 @@ const executeWorkflow = async (workflowId) => {
                             break;
                     case 'condition': 
                         // Call the condition function
-                        executeStepRes = await condition(config);
+                        executeStepRes = await checkCondition(config);
                         shouldContinue = executeStepRes?.data?.isSatisfied;
                         break;
                     case 'email':
@@ -414,9 +418,45 @@ const executeWorkflow = async (workflowId) => {
                     ];
                     break;
                 }
+
+                // Check if the step was executed successfully
+                if (executeStepRes.status != 'success') {
+                    // Merge the errors
+                    errors = [
+                        ...errors,
+                        ...executeStepRes.errors,
+                    ];
+
+                    // Append the failed step to the failed steps
+                    failedSteps.push(stepID);
+                } else {
+                    // Update the executed steps
+                    executedSteps.push(stepID);
+                }
+            }
+
+            // Update the response object
+            response = {
+                ...response, // Spread the existing response object
+                data: {
+                    executedSteps: executedSteps,
+                    failedSteps: failedSteps
+                },
+            };
+
+            // Check if all steps were executed successfully
+            if (executedSteps.length === steps.length) {
+                // Update the response object
+                response = {
+                    ...response, // Spread the existing response object
+                    status: 'success',
+                    message: 'Workflow executed successfully',
+                };
             }
         }
         
+        // Return the response
+        return response;
     } catch (error) {
         // Define the response object
         const response = {

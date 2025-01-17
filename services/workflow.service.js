@@ -339,6 +339,40 @@ const checkCondition = async (config, variables) => {
     }
 };
 
+// Function to handle webhook
+const hanleWebhook = async (config) => {
+    try {
+        // Initialize variables
+        const response = {
+            status: 'fail',
+            message: 'Failed to handle webhook',
+            data: {},
+            errors: []
+        };
+        let errors          = [];
+        let isHandled       = false;
+
+        // HERE WE CAN CALL THE WEBHOOK SERVICE TO HANDLE THE WEBHOOK
+        // UPDATE "isHandled" AND "response" BASED ON THE RESULT
+
+        // Return the response
+        return response;
+    } catch (error) {
+        // Define the response object
+        const response = {
+            status: "fail",
+            message: "Exception occurred",
+            data: {
+                isSatisfied: false
+            },
+            errors: []
+        };
+
+        // return the response
+        return response;
+    }
+};
+
 // Function to execute the workflow
 const executeWorkflow = async (workflowId) => {
     try {
@@ -400,6 +434,10 @@ const executeWorkflow = async (workflowId) => {
                     case 'email':
                         // Call the sendEmail function
                         executeStepRes = await sendEmail(config);
+                        break;
+                    case 'webhook':
+                        // Call the hanleWebhook function
+                        executeStepRes = await hanleWebhook(config);
                         break;
                     default:
                         errors = [

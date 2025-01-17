@@ -25,4 +25,10 @@ if (createAllTablesRes.status === 'fail') {
     process.exit(1);
 }
 
+// Import routes
+import workflowRoute from "./routes/workflow.routes.js";
+
+// Define routes
+app.use("/workflow", workflowRoute);
+
 export default app;

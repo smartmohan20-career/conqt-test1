@@ -5,7 +5,7 @@ import { sendResponse } from "../utils/reqResUtils.js";
 const createWorkflowCon = async (req, res) => {
     try {
         // Initialize variables
-        const response = {
+        let response = {
             status: 'fail',
             message: 'Failed to create workflow',
             data: {},
@@ -48,7 +48,7 @@ const createWorkflowCon = async (req, res) => {
         sendResponse(res, statusCode, response);
     } catch (error) {
         // Define the response object
-        const response = {
+        let response = {
             status: 500,
             message: "Internal Server Error",
             data: {},
@@ -64,7 +64,7 @@ const createWorkflowCon = async (req, res) => {
 const getWorkflowCon = async (req, res) => {
     try {
         // Initialize variables
-        const response = {
+        let response = {
             status: 'fail',
             message: 'Failed to retrieve workflow',
             data: {},
@@ -107,7 +107,7 @@ const getWorkflowCon = async (req, res) => {
         sendResponse(res, statusCode, response);
     } catch (error) {
         // Define the response object
-        const response = {
+        let response = {
             status: 500,
             message: "Internal Server Error",
             data: {},

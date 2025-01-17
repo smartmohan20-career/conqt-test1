@@ -2,7 +2,7 @@
 const wait = async (ms) => {
     try {
         // initialize variables
-        const response = {
+        let response = {
             status: 'success',
             message: 'Wait executed successfully',
             data: {},
@@ -16,7 +16,7 @@ const wait = async (ms) => {
         return response;
     } catch (error) {
         // Define the response object
-        const response = {
+        let response = {
             status: "fail",
             message: "Exception occurred",
             data: {},

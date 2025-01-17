@@ -4,7 +4,7 @@ import pool from "../config/database.js";
 const executeQuery = async (query, params) => {
     try {
         // Initialize variables
-        const response = {
+        let response = {
             status: 'fail',
             message: 'Failed to execute query',
             data: {},
@@ -35,7 +35,7 @@ const executeQuery = async (query, params) => {
         return response;
     } catch (error) {
         // Define the response object
-        const response = {
+        let response = {
             status: 500,
             message: "Internal Server Error",
             data: {},

@@ -6,7 +6,7 @@ import { sendResponse } from "../utils/reqResUtils.js";
 const saveWorkflow = async (name, steps) => {
     try {
         // Initialize variables
-        const response = {
+        let response = {
             status: 'fail',
             message: 'Failed to save workflow',
             data: {},
@@ -109,7 +109,7 @@ const saveWorkflow = async (name, steps) => {
         return response;
     } catch (error) {
         // Define the response object
-        const response = {
+        let response = {
             status: "fail",
             message: "Exception occurred",
             data: {},
@@ -125,7 +125,7 @@ const saveWorkflow = async (name, steps) => {
 const getWorkflow = async (workflowId) => {
     try {
         // Initialize variables
-        const response = {
+        let response = {
             status: 'fail',
             message: 'Failed to retrieve workflow',
             data: {},
@@ -215,7 +215,7 @@ const getWorkflow = async (workflowId) => {
         return response;
     } catch (error) {
         // Define the response object
-        const response = {
+        let response = {
             status: "fail",
             message: "Exception occurred",
             data: {},
@@ -231,7 +231,7 @@ const getWorkflow = async (workflowId) => {
 const sendEmail = async (config) => {
     try {
         // Initialize variables
-        const response = {
+        let response = {
             status: 'fail',
             message: 'Failed to send email',
             data: {},
@@ -250,7 +250,7 @@ const sendEmail = async (config) => {
         return response;
     } catch (error) {
         // Define the response object
-        const response = {
+        let response = {
             status: "fail",
             message: "Exception occurred",
             data: {},
@@ -270,7 +270,7 @@ const sleep = async (config) => {
         return wait(time);
     } catch (error) {
         // Define the response object
-        const response = {
+        let response = {
             status: "fail",
             message: "Exception occurred",
             data: {},
@@ -286,7 +286,7 @@ const sleep = async (config) => {
 const checkCondition = async (config, variables) => {
     try {
         // Initialize variables
-        const response = {
+        let response = {
             status: 'fail',
             message: 'Failed to check condition',
             data: {},
@@ -325,7 +325,7 @@ const checkCondition = async (config, variables) => {
         return response;
     } catch (error) {
         // Define the response object
-        const response = {
+        let response = {
             status: "fail",
             message: "Exception occurred",
             data: {
@@ -343,7 +343,7 @@ const checkCondition = async (config, variables) => {
 const hanleWebhook = async (config) => {
     try {
         // Initialize variables
-        const response = {
+        let response = {
             status: 'fail',
             message: 'Failed to handle webhook',
             data: {},
@@ -362,7 +362,7 @@ const hanleWebhook = async (config) => {
         return response;
     } catch (error) {
         // Define the response object
-        const response = {
+        let response = {
             status: "fail",
             message: "Exception occurred",
             data: {
@@ -380,7 +380,7 @@ const hanleWebhook = async (config) => {
 const executeWorkflow = async (workflowId) => {
     try {
         // Initialize variables
-        const response = {
+        let response = {
             status: 'fail',
             message: 'Failed to execute workflow',
             data: {},
@@ -499,7 +499,7 @@ const executeWorkflow = async (workflowId) => {
         return response;
     } catch (error) {
         // Define the response object
-        const response = {
+        let response = {
             status: "fail",
             message: "Exception occurred",
             data: {},

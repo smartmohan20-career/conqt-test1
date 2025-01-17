@@ -337,6 +337,91 @@ const checkCondition = async (config, variables) => {
     }
 };
 
+// Function to execute the workflow
+const executeWorkflow = async (workflowId) => {
+    try {
+        // Initialize variables
+        const response = {
+            status: 'fail',
+            message: 'Failed to execute workflow',
+            data: {},
+            errors: []
+        };
+        let errors          = [];
+        let isSuccess       = false;
+
+        // Retrieve the workflow
+        const workflowRes = await getWorkflow(workflowId);
+
+        // Check if the workflow was retrieved successfully
+        if (workflowRes.status != 'success') {
+            // Merge the errors
+            errors = [
+                ...errors,
+                ...workflowRes.errors,
+            ];
+        } else {
+            // Retrieve the workflow details
+            const workflow = workflowRes.data.workflow;
+
+            // Retrieve the steps
+            const steps = workflow.steps;
+
+            // Initialize executed steps responses
+            const executedStepsResponses = [];
+          
+            // Loop through the steps
+            for (const step of steps) {
+                // Retrieve the step details
+                const type          = step?.type;
+                const configJson    = step?.config;
+
+                // Initialize step response
+                let shouldContinue = true;
+                let executeStepRes = null;
+
+                // Convert configJson to JSON format
+                const config        = JSON.parse(configJson);
+
+                // Check which type of step to execute
+                switch (type) {
+                    case 'sleep':
+                            // Call the sleep function
+                            executeStepRes = await sleep(config);
+                            break;
+                    case 'condition': 
+                        // Call the condition function
+                        executeStepRes = await condition(config);
+                        shouldContinue = executeStepRes?.data?.isSatisfied;
+                        break;
+                    case 'email':
+                        // Call the sendEmail function
+                        executeStepRes = await sendEmail(config);
+                        break;
+                    default:
+                        errors = [
+                            ...errors,
+                            `Invalid step type: ${type}`,
+                        ];
+                        break;
+                }
+            }
+        }
+        
+    } catch (error) {
+        // Define the response object
+        const response = {
+            status: "fail",
+            message: "Exception occurred",
+            data: {},
+            errors: []
+        };
+
+        // return the response
+        return response;
+    }
+};
+
 export {
     saveWorkflow,
     getWorkflow,

@@ -9,11 +9,11 @@ As a quality coder, I have delivered high-quality, large-scale projects individu
 Here are some projects I completed individually:
 
 - [Team Sync](https://teams-sync.mojowebtech.com)
+- [Team Sync API](https://api-team-sync.mojowebtech.com)
 - [CollegeGram](https://collegegram.onrender.com/)
 - [Accident Advertising](https://accidentadvertising.ai/)
 - [Marketing Tool](https://mojowebtech.com/apps/MarketingTool)
 - [Consentz Staging](https://staging.consentz.com)
-- [Team Sync API](https://api-team-sync.mojowebtech.com)
 
 If you have any questions or require further clarification, feel free to contact me at [career.smartmohan@gmail.com](mailto:career.smartmohan@gmail.com).
 

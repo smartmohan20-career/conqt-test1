@@ -1,5 +1,25 @@
 # conqt-test1
 
+# Installation Instructions
+Clone the repository
+```
+git clone <repository-url>
+```
+
+Install the dependencies
+```
+cd conqt-test1
+npm install
+```
+
+# Usage Instructions
+## For Development 
+npm run dev
+
+## For Production
+npm start
+
+
 # Find the environment variables in the .env file
 ```
 ENVIRONMENT=development     # Change this to your desired environment

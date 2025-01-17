@@ -227,6 +227,41 @@ const getWorkflow = async (workflowId) => {
     }
 };
 
+// Function to send email
+const sendEmail = async (config) => {
+    try {
+        // Initialize variables
+        const response = {
+            status: 'fail',
+            message: 'Failed to send email',
+            data: {},
+            errors: []
+        };
+        let errors          = [];
+        let isSent          = false;
+
+        // Retrieve the config details
+        const { to, subject, body } = config;
+
+        // HERE WE CAN CALL THE EMAIL SERVICE TO SEND THE EMAIL
+        // UPDATE "isSent" AND "response" BASED ON THE RESULT
+
+        // return the response
+        return response;
+    } catch (error) {
+        // Define the response object
+        const response = {
+            status: "fail",
+            message: "Exception occurred",
+            data: {},
+            errors: []
+        };
+
+        // return the response
+        return response;
+    }
+};
+
 export {
     saveWorkflow,
     getWorkflow,

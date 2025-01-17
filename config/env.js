@@ -13,7 +13,7 @@ const config = {
     DB_USER: ENV_OBJ?.DB_USER,
     DB_HOST: ENV_OBJ?.DB_HOST,
     DB_NAME: ENV_OBJ?.DB_NAME,
-    DB_PASS: ENV_OBJ?.DB_PASSWORD,
+    DB_PASS: ENV_OBJ?.DB_PASS,
     DB_PORT: ENV_OBJ?.DB_PORT,
 };
 

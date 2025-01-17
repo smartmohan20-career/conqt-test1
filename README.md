@@ -1,6 +1,6 @@
 # conqt-test1
 
-## Notes
+## Note
 I did not have PostgreSQL installed on my machine, so I approached the implementation based on assumptions and without using external tools like Google or GPT. While I could not complete the full implementation due to time constraints, I focused on delivering a clear and logical approach.
 
 As a quality coder, I have delivered high-quality, large-scale projects individually in the past. However, completing the entire assignment manually within the given timeframe was not feasible. I am happy to provide references to my previous work for a better understanding of my capabilities.

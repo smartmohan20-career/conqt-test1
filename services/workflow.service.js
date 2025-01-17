@@ -352,6 +352,9 @@ const hanleWebhook = async (config) => {
         let errors          = [];
         let isHandled       = false;
 
+        // Retrieve the config details
+        const { url, method, headers, body } = config;
+
         // HERE WE CAN CALL THE WEBHOOK SERVICE TO HANDLE THE WEBHOOK
         // UPDATE "isHandled" AND "response" BASED ON THE RESULT
 

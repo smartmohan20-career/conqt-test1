@@ -282,6 +282,61 @@ const sleep = async (config) => {
     }
 };
 
+// Function to check consition
+const checkCondition = async (config, variables) => {
+    try {
+        // Initialize variables
+        const response = {
+            status: 'fail',
+            message: 'Failed to check condition',
+            data: {},
+            errors: []
+        };
+        let errors          = [];
+        let isSatisfied     = false;
+
+        // Retrieve the config details
+        const { expression } = config;
+
+        // Create a function with variables to destructure and evaluate expression
+        const func = new Function(...Object.keys(variables), `return ${expression}`);
+
+        // Call the function with the variables
+        const result = func(...Object.values(variables));
+
+        // Check if the condition is satisfied
+        if (result) {
+            // Update "isSatisfied" and "response" based on the result
+            isSatisfied = true;
+        }
+
+        // Update the response object
+        response = {
+            ...response, // Spread the existing response object
+            status: 'success',
+            message: 'Condition checked successfully',
+            data: {
+                isSatisfied: isSatisfied,
+            },
+            errors: []
+        };
+
+        // return the response
+        return response;
+    } catch (error) {
+        // Define the response object
+        const response = {
+            status: "fail",
+            message: "Exception occurred",
+            data: {},
+            errors: []
+        };
+
+        // return the response
+        return response;
+    }
+};
+
 export {
     saveWorkflow,
     getWorkflow,

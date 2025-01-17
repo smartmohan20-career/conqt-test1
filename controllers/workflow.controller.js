@@ -4,21 +4,48 @@ import { sendResponse } from "../utils/reqResUtils.js";
 // Define the createworkflow controller
 const createWorkflowCon = async (req, res) => {
     try {
+        // Initialize variables
+        const response = {
+            status: 'fail',
+            message: 'Failed to create workflow',
+            data: {},
+            errors: []
+        };
+        let errors          = [];
+        let statusCode      = 400;
+
+        // Retrieve the data from the request
         const { name, steps } = req.body;
 
         // Call the saveWorkflow service
-        const workflow = await saveWorkflow(name, steps);
+        const workflowRes = await saveWorkflow(name, steps);
 
-        // Define the response object
-        const response = {
-            status: 200,
-            message: "Workflow created successfully",
-            data: workflow,
-            errors: []
-        };
+        // Check if the workflow was saved successfully
+        if (workflowRes.status != 'success') {
+            errors = [
+                ...errors,
+                ...workflowRes.errors,
+            ];
+
+            // Update the response object
+            response = {
+                ...response, // Spread the existing response object
+                errors: errors
+            };
+        } else {
+            // Update the response object
+            response = {
+                ...response, // Spread the existing response object
+                status: 'success',
+                message: 'Workflow created successfully',
+                data: {
+                    workflow: workflowRes.data.workflow
+                },
+            };
+        }
 
         // Send the response
-        sendResponse(res, 200, response);
+        sendResponse(res, statusCode, response);
     } catch (error) {
         // Define the response object
         const response = {

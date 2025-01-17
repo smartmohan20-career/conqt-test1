@@ -350,7 +350,6 @@ const executeWorkflow = async (workflowId) => {
             errors: []
         };
         let errors          = [];
-        let isSuccess       = false;
 
         // Retrieve the workflow
         const workflowRes = await getWorkflow(workflowId);

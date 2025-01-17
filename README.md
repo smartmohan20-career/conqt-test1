@@ -13,11 +13,15 @@ npm install
 ```
 
 # Usage Instructions
-## For Development 
+## For Development
+```
 npm run dev
+```
 
 ## For Production
+```
 npm start
+```
 
 
 # Find the environment variables in the .env file

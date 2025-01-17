@@ -25,17 +25,29 @@ const STEPS_TABLE_QUERY = `
     );
 `;
 
+// // Define the create workflow table query
+// const WORKFLOW_TABLE_QUERY = `
+//     CREATE TABLE IF NOT EXISTS workflows (
+//         id SERIAL,
+//          user_id INTEGER,
+//         name VARCHAR(255) NOT NULL,
+//         steps jsonb NOT NULL,
+//         created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+//         updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+//         PRIMARY KEY (id),
+//          FOREIGN KEY (user_id) REFERENCES users(id)
+//     );
+// `;
+
 // Define the create workflow table query
 const WORKFLOW_TABLE_QUERY = `
     CREATE TABLE IF NOT EXISTS workflows (
         id SERIAL,
-        -- user_id INTEGER,
         name VARCHAR(255) NOT NULL,
         steps jsonb NOT NULL,
         created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
         updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-        PRIMARY KEY (id),
-        -- FOREIGN KEY (user_id) REFERENCES users(id)
+        PRIMARY KEY (id)
     );
 `;
 
@@ -55,7 +67,7 @@ const ALL_TABLES_QUERIES = [
 const createAllTables = async () => {
     try {
         // Initialize variables
-        const response = {
+        let response = {
             status : 'fail',
             message : 'Failed to create tables',
             data: {},
@@ -86,7 +98,7 @@ const createAllTables = async () => {
         return response;
     } catch (error) {
         // Define the response object
-        const response = {
+        let response = {
             status: 'fail',
             message: 'Exception occurred',
             data: {},

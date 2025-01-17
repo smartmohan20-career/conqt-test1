@@ -361,6 +361,9 @@ const executeWorkflow = async (workflowId) => {
                 ...workflowRes.errors,
             ];
         } else {
+            // Initialize step response
+            let shouldContinue = true;
+
             // Retrieve the workflow details
             const workflow = workflowRes.data.workflow;
 
@@ -372,13 +375,21 @@ const executeWorkflow = async (workflowId) => {
           
             // Loop through the steps
             for (const step of steps) {
+                // Initialize step response
+                let executeStepRes = null;
+
+                // Check if the step should continue
+                if (!shouldContinue) {
+                    errors = [
+                        ...errors,
+                        `Previous step failed, skipping next steps`,
+                    ];
+                    break;
+                }
+
                 // Retrieve the step details
                 const type          = step?.type;
                 const configJson    = step?.config;
-
-                // Initialize step response
-                let shouldContinue = true;
-                let executeStepRes = null;
 
                 // Convert configJson to JSON format
                 const config        = JSON.parse(configJson);
@@ -425,4 +436,5 @@ const executeWorkflow = async (workflowId) => {
 export {
     saveWorkflow,
     getWorkflow,
+    executeWorkflow
 }

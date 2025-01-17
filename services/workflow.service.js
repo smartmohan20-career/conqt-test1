@@ -121,6 +121,113 @@ const saveWorkflow = async (name, steps) => {
     }
 };
 
+// Function to get workflow
+const getWorkflow = async (workflowId) => {
+    try {
+        // Initialize variables
+        const response = {
+            status: 'fail',
+            message: 'Failed to retrieve workflow',
+            data: {},
+            errors: []
+        };
+        let errors          = [];
+        let workflowDetails = null;
+
+        // Define the query and params for workflow
+        const workflowQuery = `
+            SELECT * FROM workflows
+            WHERE id = $1
+            LIMIT 1;
+        `;
+        const workflowParams = [workflowId];
+
+        // Retrieve the workflow
+        const workflowResult = await executeQuery(workflowQuery, workflowParams);
+
+        // Check if the workflow was retrieved successfully
+        if (workflowResult.status != 'success') {
+            // Merge the errors
+            errors = [
+                ...errors,
+                ...workflowResult.errors,
+            ];
+        } else {
+            // Retrieve the workflow details
+            const workflow      = workflowResult.data[0];
+
+            // Retrieve the workflow details
+            const stepsIdsJson = workflow.steps;
+
+            // Convert stepsJson to array
+            const stepsIds = JSON.parse(stepsIdsJson);
+
+            // Define query to retrieve steps
+            const stepsQuery = `
+                SELECT * FROM steps
+                WHERE id IN ($1)
+                ORDER BY id;
+            `;
+            const stepsParams = [stepsIds];
+
+            // Retrieve the steps
+            const stepsResult = await executeQuery(stepsQuery, stepsParams);
+
+            // Check if the steps were retrieved successfully
+            if (stepsResult.status != 'success') {
+                // Merge the errors
+                errors = [
+                    ...errors,
+                    ...stepsResult.errors,
+                ];
+            } else {
+                // Retrieve the steps details
+                const steps = stepsResult.data;
+
+                // Update the workflow details
+                workflowDetails = {
+                    ...workflow,
+                    steps: steps
+                };
+            }
+        }
+
+        // Check if failed to retrieve workflow
+        if (errors.length > 0 || workflowDetails) {
+            // Update the response object
+            response = {
+                ...response, // Spread the existing response object
+                errors: errors
+            };
+        } else {
+            // Update the response object
+            response = {
+                ...response, // Spread the existing response object
+                status: 'success',
+                message: 'Workflow retrieved successfully',
+                data: {
+                    workflow: workflowDetails
+                },
+            };
+        }
+
+        // return the response
+        return response;
+    } catch (error) {
+        // Define the response object
+        const response = {
+            status: "fail",
+            message: "Exception occurred",
+            data: {},
+            errors: []
+        };
+
+        // return the response
+        return response;
+    }
+};
+
 export {
     saveWorkflow,
+    getWorkflow,
 }

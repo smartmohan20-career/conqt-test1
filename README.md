@@ -24,7 +24,7 @@ As a working professional, my time to complete this assignment without tools lik
 ### Prerequisites
 Ensure you have the following installed on your machine:
 - [Node.js](https://nodejs.org/) (v16 or above)
-- [npm](https://www.npmjs.com/) or [Yarn](https://yarnpkg.com/)
+- [npm](https://www.npmjs.com/)
 
 ### Steps to Install
 

@@ -262,6 +262,26 @@ const sendEmail = async (config) => {
     }
 };
 
+// Function to sleep
+const sleep = async (config) => {
+    try {
+        // Retrieve the config details
+        const { time} = config; // Time in mili seconds
+        return wait(time);
+    } catch (error) {
+        // Define the response object
+        const response = {
+            status: "fail",
+            message: "Exception occurred",
+            data: {},
+            errors: []
+        };
+
+        // return the response
+        return response;
+    }
+};
+
 export {
     saveWorkflow,
     getWorkflow,

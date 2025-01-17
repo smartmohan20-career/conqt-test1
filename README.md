@@ -5,6 +5,10 @@ I did not have PostgreSQL installed on my machine, so I approached the implement
 
 As a quality coder, I have delivered high-quality, large-scale projects individually in the past. However, completing the entire assignment manually within the given timeframe was not feasible. I am happy to provide references to my previous work for a better understanding of my capabilities.
 
+I had some questions regarding the assignment, but because of the unavailability of development folks, they could not be clarified. I had to implement it based on assumptions. I can provide the best quality in minimal time if it could be an open-book scenario where I can use Google or GPT to speed up productivity.
+
+I am a result-driven person who can solve any type of problem using available resources on the internet. I hope you are looking for a result-driven person who can solve any type of problem and provide effective solutions.
+
 ### Sample Projects
 Here are some projects I completed individually:
 

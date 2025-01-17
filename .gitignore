@@ -1,0 +1,9 @@
+node_modules/
+
+# Logs files
+logs/
+
+# Temporary Files
+temp/
+
+# Local Files
